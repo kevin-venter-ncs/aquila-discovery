@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Aquila — Discovery Questionnaire | NC South</title>
+<style>
+  :root{
+    --navy:#2C3E50; --navy-2:#34495e; --ink:#1f2a36; --muted:#667385;
+    --line:#e3e8ee; --bg:#f5f7fa; --card:#ffffff; --accent:#3d7ea6; --ok:#1f9d6b;
+    --shadow:0 1px 3px rgba(20,30,45,.08),0 8px 24px rgba(20,30,45,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  header.site{background:var(--navy);color:#fff;padding:48px 20px 40px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header.site .wrap{padding:0 20px}
+  .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:#9fb3c8;margin:0 0 10px}
+  header.site h1{margin:0 0 8px;font-size:30px;line-height:1.2;font-weight:700}
+  header.site p{margin:6px 0 0;color:#cdd8e3;max-width:60ch}
+  .badge{display:inline-block;margin-top:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+    color:#dfe8f0;font-size:13px;padding:6px 12px;border-radius:999px}
+  main{padding:34px 0 80px}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin:-32px auto 26px;
+    max-width:820px;box-shadow:var(--shadow)}
+  .intro p{margin:0 0 12px}
+  .intro p:last-child{margin-bottom:0}
+  .note{background:#eef5fb;border:1px solid #d4e6f4;border-radius:10px;padding:14px 16px;font-size:14.5px;color:#2c4a63}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin:0 auto 22px;
+    max-width:820px;box-shadow:var(--shadow)}
+  h2{font-size:20px;margin:0 0 4px;color:var(--navy)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .q{padding:16px 0;border-top:1px solid var(--line)}
+  .q:first-of-type{border-top:0}
+  .q label{display:block;font-weight:600;margin-bottom:8px}
+  .q label .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;
+    background:var(--navy);color:#fff;font-size:13px;margin-right:9px;vertical-align:middle}
+  .q .hint{font-weight:400;color:var(--muted);font-size:14px;display:block;margin:4px 0 8px 33px}
+  textarea,input[type=text]{width:100%;border:1px solid #cfd8e3;border-radius:9px;padding:11px 12px;font:inherit;
+    font-size:15px;color:var(--ink);background:#fff;resize:vertical}
+  textarea{min-height:78px}
+  textarea:focus,input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(61,126,166,.15)}
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px}
+  th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+  th{background:#f0f4f8;color:var(--navy);font-weight:600}
+  td input{border:0;padding:6px;font-size:14px;width:100%;background:transparent}
+  td input:focus{box-shadow:none;background:#f7fafd;border-radius:6px}
+  td.stage{font-weight:600;color:var(--ink);background:#fbfcfe;white-space:nowrap}
+  .upload{background:linear-gradient(180deg,#2c3e50,#34495e);color:#fff;border-radius:14px;padding:26px;max-width:820px;
+    margin:0 auto 22px;box-shadow:var(--shadow)}
+  .upload h2{color:#fff}
+  .upload p{color:#cfdae6;margin:6px 0 18px;font-size:15px}
+  .btn{display:inline-block;border:0;border-radius:10px;padding:13px 22px;font:inherit;font-size:15px;font-weight:600;
+    cursor:pointer;text-decoration:none;transition:transform .04s ease,filter .15s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-upload{background:#fff;color:var(--navy)}
+  .btn-upload:hover{filter:brightness(.96)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);margin-left:10px}
+  .actions{position:sticky;bottom:0;background:rgba(245,247,250,.92);backdrop-filter:blur(6px);border-top:1px solid var(--line);
+    padding:14px 0;margin-top:8px;z-index:5}
+  .actions .wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-second{background:#fff;color:var(--navy);border:1px solid #cfd8e3}
+  .saved{color:var(--ok);font-size:13.5px;margin-left:auto;opacity:0;transition:opacity .3s}
+  .saved.show{opacity:1}
+  footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 20px 50px}
+  @media print{
+    header.site{background:#fff;color:#000;border-bottom:2px solid #000}
+    .badge,.actions,.upload .btn,.note{display:none}
+    .intro,section.card,.upload{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+    .upload{background:#fff;color:#000}.upload h2,.upload p{color:#000}
+    textarea,input{border:1px solid #999}
+  }
+  @media(max-width:560px){header.site h1{font-size:24px}.q .hint{margin-left:0}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <p class="eyebrow">NC South · Discovery</p>
+    <h1>Aquila — Pre-Build Discovery</h1>
+    <p>Scoping an AI tool that turns your clients' Excel data into reviewed financial statements and tax-return figures — with your accountants always reviewing and filing.</p>
+    <span class="badge">~15 minutes · partial answers are fine · nothing is a commitment</span>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <p>Hi team, thanks for the opportunity to build this with you. Aquila will take a client's financial information — mostly Excel/CSV — and prepare <strong>draft</strong> financial statements, income-tax figures, GST, and payroll/FBT numbers. The tool drafts; <strong>you review, sign off, and file via myIR</strong>.</p>
+    <p>Type your answers below — your progress saves automatically in this browser. When you're done, hit <strong>Download my answers</strong> and send the file (plus any sample client files) using the secure link further down.</p>
+    <p class="note"><strong>Privacy:</strong> this page sends nothing anywhere on its own. Your answers stay in your browser until you download them. Please share real client files only through the secure upload link below.</p>
+  </div>
+
+  <form id="qform">
+  <!-- ============ TWELVE QUESTIONS ============ -->
+  <section class="card">
+    <h2>Part 1 — Twelve questions</h2>
+    <p class="sub">Answer what's easy. Even rough notes help us arrive up to speed.</p>
+
+    <div class="q"><label><span class="num">1</span>One job, end to end</label>
+      <span class="hint">Walk us through a single client's year-end as it works today — from the files you receive to the statements and returns you file. Where does the time go?</span>
+      <textarea name="q1"></textarea></div>
+
+    <div class="q"><label><span class="num">2</span>Client mix</label>
+      <span class="hint">Roughly how many client entities do you act for, and what's the split across companies, sole traders, partnerships/LTCs, and trusts?</span>
+      <textarea name="q2"></textarea></div>
+
+    <div class="q"><label><span class="num">3</span>What you receive</label>
+      <span class="hint">For a typical client, what form does the data arrive in — raw bank/CSV exports, a coded trial balance, a shoebox of spreadsheets, a Xero/MYOB file, or a mix?</span>
+      <textarea name="q3"></textarea></div>
+
+    <div class="q"><label><span class="num">4</span>Software today</label>
+      <span class="hint">What do you use for workpapers, financial statements, and tax returns (Xero, MYOB, Workpapers, APS, CCH, Thomson Reuters, Excel)? What stays, what hurts?</span>
+      <textarea name="q4"></textarea></div>
+
+    <div class="q"><label><span class="num">5</span>Reporting standard</label>
+      <span class="hint">Do clients report under special-purpose (SPFR) statements, or do some need general-purpose/GAAP? Any special rules (farming, property, look-through)?</span>
+      <textarea name="q5"></textarea></div>
+
+    <div class="q"><label><span class="num">6</span>Chart of accounts</label>
+      <span class="hint">Do you run a standard chart of accounts across clients, or is it per-client? (You can share a template via the secure link below.)</span>
+      <textarea name="q6"></textarea></div>
+
+    <div class="q"><label><span class="num">7</span>GST &amp; payroll</label>
+      <span class="hint">What's the spread of GST setups (registered/not, payments/invoice/hybrid, frequency)? Do you prepare payroll/payday/FBT figures, or consume payroll-software reports?</span>
+      <textarea name="q7"></textarea></div>
+
+    <div class="q"><label><span class="num">8</span>Tax-agent status</label>
+      <span class="hint">Are you a registered tax agent with clients linked in myIR (extension of time)? This affects due dates and how returns are lodged.</span>
+      <textarea name="q8"></textarea></div>
+
+    <div class="q"><label><span class="num">9</span>Review &amp; sign-off</label>
+      <span class="hint">Who prepares vs. who reviews? What does your sign-off / quality-control step look like, and what would you want the tool to flag for review?</span>
+      <textarea name="q9"></textarea></div>
+
+    <div class="q"><label><span class="num">10</span>Outputs &amp; branding</label>
+      <span class="hint">What final deliverables do clients get (PDF statements, a letter, the return), and what branding/template should the tool's output match?</span>
+      <textarea name="q10"></textarea></div>
+
+    <div class="q"><label><span class="num">11</span>Data &amp; privacy</label>
+      <span class="hint">Any requirements on where client data is stored (NZ residency), retention, and access control across your team?</span>
+      <textarea name="q11"></textarea></div>
+
+    <div class="q"><label><span class="num">12</span>Success &amp; commercials</label>
+      <span class="hint">What would make this a clear win at 3 and 12 months (hours saved per job? jobs per preparer?), what's your timeline, and is there a budget you're working within?</span>
+      <textarea name="q12"></textarea></div>
+  </section>
+
+  <!-- ============ WORKFLOW WALKTHROUGH ============ -->
+  <section class="card">
+    <h2>Part 2 — Workflow walkthrough</h2>
+    <p class="sub">Pick one recent client job and sketch who touches each stage.</p>
+    <table>
+      <thead><tr><th>Stage</th><th>Who does it</th><th>Tool used</th><th>How long</th><th>Pain points</th></tr></thead>
+      <tbody id="wf"></tbody>
+    </table>
+  </section>
+
+  <!-- ============ VALIDATION ============ -->
+  <section class="card">
+    <h2>Part 3 — Validation samples</h2>
+    <p class="sub">The single most valuable thing you can give us.</p>
+    <p style="margin:0 0 12px">To prove Aquila produces correct, trustworthy output, we'd love <strong>2–3 completed jobs</strong>: the <strong>input files</strong> you started from (real or sanitised — client names removed is fine) <em>and</em> the <strong>finished statements and returns</strong> you produced. Ideally one company (IR4 + GST) plus one other entity type.</p>
+    <div class="q" style="border-top:1px solid var(--line)"><label>Anything we should know about the samples you can share?</label>
+      <textarea name="samples"></textarea></div>
+  </section>
+  </form>
+
+  <!-- ============ SECURE UPLOAD ============ -->
+  <section class="upload">
+    <h2>Securely send your files &amp; answers</h2>
+    <p>Use this private, access-controlled link to send your downloaded answers file and any sample client files. Please don't email sensitive client data — use this link.</p>
+    <a class="btn btn-upload" id="uploadBtn" href="#" target="_blank" rel="noopener">Open secure upload →</a>
+    <a class="btn btn-ghost" href="mailto:kevin@ncsouth.com?subject=Aquila%20discovery">Email Kevin instead</a>
+  </section>
+
+  <footer>
+    Prepared by NC South · We build the systems that buy back your time.<br>
+    Questions? <a href="mailto:kevin@ncsouth.com">kevin@ncsouth.com</a>
+  </footer>
+</main>
+
+<div class="actions">
+  <div class="wrap">
+    <button class="btn btn-primary" id="download">⬇ Download my answers</button>
+    <button class="btn btn-second" id="printBtn">🖨 Print / Save as PDF</button>
+    <button class="btn btn-second" id="clear">Clear form</button>
+    <span class="saved" id="saved">✓ Saved</span>
+  </div>
+</div>
+
+<script>
+/* ====================================================================
+   CONFIG — set this to your private upload link before going live.
+   Use a Google Drive "file request" / shared folder, OneDrive request,
+   Dropbox file request, or similar access-controlled location.
+   ==================================================================== */
+const UPLOAD_LINK = "REPLACE_WITH_YOUR_PRIVATE_UPLOAD_LINK";
+
+/* Workflow stages */
+const STAGES = [
+  "Collect / chase client data","Clean & code transactions","Build trial balance & adjustments",
+  "Reconciliations (bank, GST, debtors/creditors)","Depreciation / fixed assets",
+  "Draft financial statements","Prepare tax return figures (IR10 + IR3/4/6/7)",
+  "Prepare GST / payroll / FBT","Partner review & sign-off","File via myIR"
+];
+const wf = document.getElementById('wf');
+STAGES.forEach((s,i)=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td class="stage">${s}</td>`+
+    ['who','tool','time','pain'].map(k=>`<td><input type="text" name="wf_${i}_${k}"></td>`).join('');
+  wf.appendChild(tr);
+});
+
+const form=document.getElementById('qform');
+const KEY='aquila-discovery-v1';
+const savedEl=document.getElementById('saved');
+let t;
+
+/* restore */
+try{
+  const data=JSON.parse(localStorage.getItem(KEY)||'{}');
+  for(const [k,v] of Object.entries(data)){
+    const el=form.elements[k]; if(el) el.value=v;
+  }
+}catch(e){}
+
+/* autosave */
+function snapshot(){
+  const data={};
+  for(const el of form.elements){ if(el.name) data[el.name]=el.value; }
+  return data;
+}
+form.addEventListener('input',()=>{
+  clearTimeout(t);
+  t=setTimeout(()=>{
+    localStorage.setItem(KEY,JSON.stringify(snapshot()));
+    savedEl.classList.add('show');
+    setTimeout(()=>savedEl.classList.remove('show'),1200);
+  },400);
+});
+
+/* upload link */
+const ub=document.getElementById('uploadBtn');
+if(UPLOAD_LINK && !UPLOAD_LINK.startsWith('REPLACE')){ ub.href=UPLOAD_LINK; }
+else{
+  ub.addEventListener('click',e=>{e.preventDefault();
+    alert('The secure upload link has not been set yet. Please email kevin@ncsouth.com and we\\'ll send you one.');});
+}
+
+/* build a readable answers document */
+const QLABELS={
+  q1:"1. One job, end to end",q2:"2. Client mix",q3:"3. What you receive",q4:"4. Software today",
+  q5:"5. Reporting standard",q6:"6. Chart of accounts",q7:"7. GST & payroll",q8:"8. Tax-agent status",
+  q9:"9. Review & sign-off",q10:"10. Outputs & branding",q11:"11. Data & privacy",q12:"12. Success & commercials",
+  samples:"Validation samples — notes"
+};
+function buildDoc(){
+  const d=snapshot();
+  let out="AQUILA — DISCOVERY QUESTIONNAIRE RESPONSE\n";
+  out+="Completed: "+new Date().toLocaleString('en-NZ')+"\n";
+  out+="==================================================\n\n";
+  out+="PART 1 — TWELVE QUESTIONS\n\n";
+  ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12"].forEach(k=>{
+    out+=QLABELS[k]+"\n"+(d[k]?.trim()||"(no answer)")+"\n\n";
+  });
+  out+="\nPART 2 — WORKFLOW WALKTHROUGH\n\n";
+  STAGES.forEach((s,i)=>{
+    const who=d[`wf_${i}_who`]||"", tool=d[`wf_${i}_tool`]||"", time=d[`wf_${i}_time`]||"", pain=d[`wf_${i}_pain`]||"";
+    if(who||tool||time||pain){
+      out+=`• ${s}\n    Who: ${who||"-"} | Tool: ${tool||"-"} | Time: ${time||"-"} | Pain: ${pain||"-"}\n`;
+    }
+  });
+  out+="\n\nPART 3 — VALIDATION SAMPLES\n\n"+(d.samples?.trim()||"(no answer)")+"\n";
+  return out;
+}
+document.getElementById('download').addEventListener('click',()=>{
+  const blob=new Blob([buildDoc()],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='aquila-discovery-answers.txt';
+  document.body.appendChild(a);a.click();a.remove();
+});
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.getElementById('clear').addEventListener('click',()=>{
+  if(confirm('Clear all your answers from this browser?')){
+    localStorage.removeItem(KEY);
+    for(const el of form.elements){ if(el.name) el.value=''; }
+  }
+});
+</script>
+</body>
+</html>
